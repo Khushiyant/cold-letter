@@ -40,3 +40,6 @@ build/
 # OS-specific files
 .DS_Store
 Thumbs.db
+
+# node-modules
+node_modules/
