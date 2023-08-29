@@ -31,10 +31,6 @@ class ColdMailing:
 
         self.tools = [
             Tool(
-                name="ArXiv Search",
-                description="Search research papers about professor.",
-            ),
-            Tool(
                 name="Google Search",
                 description="Search Google for recent results about the company or professor. Use it only once",
                 func=search.run,
@@ -51,8 +47,8 @@ class ColdMailing:
         self.target_name = target_name
         self.resume = resume
         return self.agent.run(f"""
-            Write a cold mail to {type} named {target_name} for the position of {requested_position} with following conditons:
-            if it is a professor then use his/her top 3 best work by searching google scholar.
+            Write a cold mail to {type} called {target_name} for the position of {requested_position} with following conditons:
+            if it is a professor then use his/her top 3 best research paper work by using google scholar else if it is a company then use my info to show my passion.
 
             Use the following information to create the cold mail:
             {resume}

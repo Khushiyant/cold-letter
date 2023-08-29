@@ -12,10 +12,10 @@ type = st.radio("What would you like to do?", ("Company", "Professor"))
 
 st.header("Target Information")
 target_name = st.text_input("Name", placeholder="Google")
-requested_position = st.text_input("Position", placeholder="Software Engineer")
 
 st.header("Your Information")
 name = st.text_input("Your Name", placeholder="John Doe")
+requested_position = st.text_input("Requested Position", placeholder="Software Engineer")
 
 st.header("Resume Upload")
 resume = st.file_uploader("Upload your resume", type="pdf")
