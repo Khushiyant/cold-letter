@@ -21,6 +21,7 @@ st.header("Resume Upload")
 resume = st.file_uploader("Upload your resume", type="pdf")
 
 # Submit button
+
 if st.button("Submit"):
     content = mailer.generate(target_name, name, extractor.extract(resume), type, requested_position)
     st.write(content)
