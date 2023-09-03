@@ -1,12 +1,9 @@
-from langchain.agents import load_tools
-from langchain.agents import initialize_agent
-from langchain.agents import AgentType
-from langchain.llms import OpenAI
 import PyPDF2
+from dotenv import load_dotenv
+from langchain.agents import AgentType, initialize_agent
+from langchain.llms import OpenAI
 from langchain.tools import Tool
 from langchain.utilities import GoogleSearchAPIWrapper
-from dotenv import load_dotenv
-
 
 # Load environment variables
 load_dotenv()
@@ -42,15 +39,25 @@ class ColdMailing:
             agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
             verbose=True)
 
-    def generate(self, target_name, name, resume, type, requested_position):
-        self.name = name
-        self.target_name = target_name
-        self.resume = resume
+    def generate(self, target_name, name, resume, target_type, requested_position):
+        """
+        Generates a cold email template.
+        
+        Parameters
+        ----------
+        target_name : str
+        name : str
+        resume : file
+        target_type : str
+        requested_position : str
+        """
+
         return self.agent.run(f"""
-            Write a cold mail to {type} called {target_name} for the position of {requested_position} with following conditons:
+            Write a cold mail to {target_type} called {target_name} for the position of {requested_position} with following conditons:
             if it is a professor then use his/her top 3 best research paper work by using google scholar else if it is a company then use my info to show my passion.
 
             Use the following information to create the cold mail:
+            Name: {name}
             {resume}
             """)
 
@@ -70,9 +77,16 @@ class PDFTextExtractor:
     """
 
     def extract(self, file):
+        """
+        Extracts text from a PDF file.
+        
+        Parameters
+        ----------
+        file : file
+        """
         text = str()
-        fileReader = PyPDF2.PdfReader(file)
-        for page in fileReader.pages:
+        file_reader = PyPDF2.PdfReader(file)
+        for page in file_reader.pages:
             text += page.extract_text()
 
         return text
