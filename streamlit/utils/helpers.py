@@ -29,7 +29,7 @@ class ColdMailing:
         self.tools = [
             Tool(
                 name="Google Search",
-                description="Search Google for recent results about the company or professor. Use it only once",
+                description="Search Google for results about the company or professor. Use it only once in any case",
                 func=search.run,
             )
         ]
